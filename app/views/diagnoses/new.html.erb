@@ -1,0 +1,130 @@
+<h2 class="diag-title">料理診断</h2>
+
+<%= form_with url: diagnosis_result_path, method: :get, html: { id: "diagnosisForm" } do %>
+  <div id="diagnosisWizard" class="diag-wizard">
+
+    <!-- STEP 1 -->
+    <section class="diag-step active" data-required-name="cook_time">
+      <h3 class="diag-q">Q1. 今日は料理にどれくらい時間を使えそう？</h3>
+
+      <div class="diag-options">
+        <%= radio_button_tag :cook_time, 30, false, id: "cook_time_30", class: "diag-radio" %>
+        <label for="cook_time_30" class="diag-option">
+          <span class="diag-option-main">30分以内</span>
+        </label>
+
+        <%= radio_button_tag :cook_time, 60, false, id: "cook_time_60", class: "diag-radio" %>
+        <label for="cook_time_60" class="diag-option">
+          <span class="diag-option-main">30〜60分</span>
+        </label>
+
+        <%= radio_button_tag :cook_time, 999, false, id: "cook_time_999", class: "diag-radio" %>
+        <label for="cook_time_999" class="diag-option">
+          <span class="diag-option-main">60分以上</span>
+        </label>
+      </div>
+
+      <p class="diag-error" aria-live="polite"></p>
+
+      <div class="diag-nav">
+        <button type="button" class="diag-next">NEXT</button>
+      </div>
+    </section>
+
+    <!-- STEP 2 -->
+    <section class="diag-step" data-required-name="mood">
+      <h3 class="diag-q">Q2. 今日の気分に一番近いものは？</h3>
+
+      <div class="diag-options">
+        <%= radio_button_tag :mood, "quick", false, id: "mood_quick", class: "diag-radio" %>
+        <label for="mood_quick" class="diag-option">
+          <span class="diag-option-main">手軽に</span>
+        </label>
+
+        <%= radio_button_tag :mood, "normal", false, id: "mood_normal", class: "diag-radio" %>
+        <label for="mood_normal" class="diag-option">
+          <span class="diag-option-main">ほどほどに</span>
+        </label>
+
+        <%= radio_button_tag :mood, "careful", false, id: "mood_careful", class: "diag-radio" %>
+        <label for="mood_careful" class="diag-option">
+          <span class="diag-option-main">しっかり</span>
+        </label>
+      </div>
+
+      <p class="diag-error" aria-live="polite"></p>
+
+      <div class="diag-nav">
+        <button type="button" class="diag-back">BACK</button>
+        <button type="button" class="diag-next">NEXT</button>
+      </div>
+    </section>
+
+    <!-- STEP 3 -->
+    <section class="diag-step" data-required-name="dish_type">
+      <h3 class="diag-q">Q3. 今日作りたいのは？</h3>
+
+      <div class="diag-options">
+        <%= radio_button_tag :dish_type, 0, false, id: "dish_type_main", class: "diag-radio" %>
+        <label for="dish_type_main" class="diag-option">
+          <span class="diag-option-main">主菜</span>
+          <span class="diag-option-sub">メイン</span>
+        </label>
+
+        <%= radio_button_tag :dish_type, 1, false, id: "dish_type_side", class: "diag-radio" %>
+        <label for="dish_type_side" class="diag-option">
+          <span class="diag-option-main">副菜</span>
+          <span class="diag-option-sub">サイド</span>
+        </label>
+
+        <%= radio_button_tag :dish_type, 2, false, id: "dish_type_staple", class: "diag-radio" %>
+        <label for="dish_type_staple" class="diag-option">
+          <span class="diag-option-main">主食</span>
+          <span class="diag-option-sub">麺・ごはん</span>
+        </label>
+      </div>
+
+      <p class="diag-error" aria-live="polite"></p>
+
+      <div class="diag-nav">
+        <button type="button" class="diag-back">BACK</button>
+        <button type="button" class="diag-next">NEXT</button>
+      </div>
+    </section>
+
+    <!-- STEP 4 -->
+    <section class="diag-step" data-required-name="cuisine_type">
+      <h3 class="diag-q">Q4. どんな系統にする？</h3>
+
+      <div class="diag-options">
+        <%= radio_button_tag :cuisine_type, 0, false, id: "cuisine_type_ja", class: "diag-radio" %>
+        <label for="cuisine_type_ja" class="diag-option">
+          <span class="diag-option-main">和</span>
+        </label>
+
+        <%= radio_button_tag :cuisine_type, 1, false, id: "cuisine_type_we", class: "diag-radio" %>
+        <label for="cuisine_type_we" class="diag-option">
+          <span class="diag-option-main">洋</span>
+        </label>
+
+        <%= radio_button_tag :cuisine_type, 2, false, id: "cuisine_type_cha", class: "diag-radio" %>
+        <label for="cuisine_type_cha" class="diag-option">
+          <span class="diag-option-main">中</span>
+        </label>
+
+        <%= radio_button_tag :cuisine_type, "any", false, id: "cuisine_type_any", class: "diag-radio" %>
+        <label for="cuisine_type_any" class="diag-option">
+          <span class="diag-option-main">こだわらない</span>
+        </label>
+      </div>
+
+      <p class="diag-error" aria-live="polite"></p>
+
+      <div class="diag-nav">
+        <button type="button" class="diag-back">BACK</button>
+        <button type="submit" class="diag-submit">診断する</button>
+      </div>
+    </section>
+
+  </div>
+<% end %>

@@ -1,0 +1,118 @@
+<%= stylesheet_link_tag "mypage", media: "all" %>
+
+<div class="mypage">
+  <h1 class="mypage__title">マイページ</h1>
+
+  <!-- プロフィール -->
+  <section class="card">
+    <div class="card__head">
+      <h2 class="card__title">プロフィール</h2>
+
+      <% if current_user.id == @user.id %>
+        <%= link_to "編集する", edit_user_registration_path, class: "btn-ghost btn-sm" %>
+      <% end %>
+    </div>
+
+    <dl class="profile">
+      <div class="profile__row">
+        <dt>名前</dt>
+        <dd><%= @user.name %></dd>
+      </div>
+
+      <div class="profile__row">
+        <dt>メールアドレス</dt>
+        <dd><%= @user.email %></dd>
+      </div>
+
+      <div class="profile__row">
+        <dt>プロフィール</dt>
+        <dd><%= @user.profile.presence || "未設定" %></dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- 投稿一覧 -->
+  <section class="card">
+    <div class="card__head">
+      <h2 class="card__title">ユーザーの投稿一覧</h2>
+    </div>
+
+    <% if @user.posts.any? %>
+      <div class="posts-list">
+        <% @user.posts.order(created_at: :desc).each do |t| %>
+          <div class="post-row">
+            <div class="post-row__main">
+              <div class="post-row__title"><%= t.title %></div>
+              <div class="post-row__meta">投稿日：<%= t.created_at.strftime("%Y/%m/%d") %></div>
+            </div>
+
+            <%= link_to "詳細", post_path(t), class: "btn-primary btn-sm" %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="muted">まだ投稿がありません。</p>
+    <% end %>
+  </section>
+
+  <!-- カレンダー -->
+  <section class="card" id="calendar">
+    <div class="card__head">
+      <h2 class="card__title">料理カレンダー</h2>
+
+      <div class="cal-nav">
+        <%= link_to "◀ 前月",
+              url_for(month: @month.prev_month.strftime("%Y-%m"), anchor: "calendar"),
+              class: "btn-ghost btn-sm" %>
+
+        <span class="cal-nav__month"><%= @month.strftime("%Y年%m月") %></span>
+
+        <%= link_to "次月 ▶",
+              url_for(month: @month.next_month.strftime("%Y-%m"), anchor: "calendar"),
+              class: "btn-ghost btn-sm" %>
+      </div>
+    </div>
+
+    <div class="calendar-wrap">
+      <table class="calendar">
+        <thead>
+          <tr>
+            <th class="sun">日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th class="sat">土</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @range.to_a.each_slice(7) do |week| %>
+            <tr>
+              <% week.each do |date| %>
+                <td class="calendar__cell <%= 'is-today' if date == Date.current %>">
+                  <div class="calendar__day">
+                    <strong><%= date.day %></strong>
+                    <% if date == Date.current %>
+                      <span class="today-badge">今日</span>
+                    <% end %>
+                  </div>
+
+                  <% if @logs_by_date[date].present? %>
+                    <ul class="calendar__list">
+                      <% @logs_by_date[date].each do |log| %>
+                        <li class="calendar__item">
+                          <%= link_to log.post.title, post_path(log.post), class: "calendar__link" %>
+
+                          <%= button_to "削除", cooking_log_path(log),
+                                method: :delete,
+                                form: { class: "inline" },
+                                data: { turbo_confirm: "この記録を削除する？" },
+                                class: "btn-danger btn-xs" %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>

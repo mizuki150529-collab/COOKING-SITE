@@ -1,0 +1,29 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag "devise", media: "all", "data-turbo-track": "reload" %>
+<% end %>
+
+<div class="auth-page">
+  <div class="auth-card">
+    <h2 class="auth-title">Create an account</h2>
+    <p class="auth-sub">Connect with your friends today!</p>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "auth-form" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <%= f.email_field :email, autofocus: true, autocomplete: "email",
+            class: "auth-input", placeholder: "Enter Your Email" %>
+
+      <%= f.password_field :password, autocomplete: "new-password",
+            class: "auth-input", placeholder: "Enter Your Password (6 characters minimum)" %>
+
+      <%= f.password_field :password_confirmation, autocomplete: "new-password",
+            class: "auth-input", placeholder: "Confirm Your Password" %>
+
+      <%= f.submit "Sign up", class: "auth-btn" %>
+    <% end %>
+
+    <div class="auth-links">
+      <%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>

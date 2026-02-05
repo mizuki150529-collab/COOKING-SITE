@@ -1,0 +1,90 @@
+<%= stylesheet_link_tag 'new', media: "all" %>
+
+<div class="post-show-page">
+
+  <div class="show-card">
+    <% if @post.image.attached? %>
+      <%= image_tag @post.image, class: "show-hero-image" %>
+    <% end %>
+
+    <div class="show-head">
+      <h2 class="show-title"><%= @post.title %></h2>
+      <p class="show-date">投稿日：<%= @post.created_at.strftime("%Y/%m/%d") %></p>
+    </div>
+
+    <div class="show-grid">
+      <div class="show-block">
+        <h3>材料</h3>
+        <pre><%= @post.ingredients %></pre>
+      </div>
+
+      <div class="show-block">
+        <h3>作り方</h3>
+        <pre><%= @post.steps %></pre>
+      </div>
+    </div>
+
+    <div class="show-meta">
+      <div class="meta-item">
+        <span class="meta-label">調理時間</span>
+        <span class="meta-value">
+          <%= case @post.cook_time
+              when 30 then "30分以内"
+              when 60 then "30〜60分"
+              when 999 then "60分以上"
+              end %>
+        </span>
+      </div>
+
+      <div class="meta-item">
+        <span class="meta-label">難易度</span>
+        <span class="meta-value">
+          <%= case @post.difficulty
+              when 0 then "簡単（工程少なめ）"
+              when 1 then "普通"
+              when 2 then "難しい（工程多め）"
+              end %>
+        </span>
+      </div>
+
+      <div class="meta-item">
+        <span class="meta-label">料理タイプ</span>
+        <span class="meta-value">
+          <%= case @post.dish_type
+              when 0 then "主菜（メイン）"
+              when 1 then "副菜（サイド）"
+              when 2 then "主食（ご飯、麺）"
+              end %>
+        </span>
+      </div>
+
+      <div class="meta-item">
+        <span class="meta-label">系統</span>
+        <span class="meta-value">
+          <%= case @post.cuisine_type.to_i
+              when 0 then "和"
+              when 1 then "洋"
+              when 2 then "中"
+              end %>
+        </span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <% if user_signed_in? && @post.user_id == current_user.id %>
+        <%= link_to "編集", edit_post_path(@post), class: "btn-ghost" %>
+        <%= button_to "削除", post_path(@post),
+              method: :delete,
+              data: { confirm: "本当に削除しますか？" },
+              class: "btn-danger" %>
+      <% end %>
+
+      <%= button_to "これに決めた（今日作る）",
+            cooking_logs_path(post_id: @post.id),
+            method: :post,
+            class: "btn-primary" %>
+
+      <%= link_to "投稿一覧へ戻る", posts_path, class: "btn-ghost" %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<% content_for :body_class, "diagnosis-result-hero" %>
+
+<% if @post.present? %>
+  <section class="hero">
+    <p class="hero-kicker">YOUR BEST RECIPE</p>
+    <h1 class="hero-title"><%= @post.title %></h1>
+    <p class="hero-sub">— 今日のおすすめ —</p>
+
+    <div class="hero-actions">
+      <%= button_to "これに決めた（今日作る）",
+            cooking_logs_path(post_id: @post.id),
+            method: :post,
+            class: "hero-cta" %>
+
+      <%= link_to "診断に戻る", new_diagnosis_path, class: "hero-link" %>
+    </div>
+  </section>
+
+  <!-- 材料・作り方はこの下（あってもOK） -->
+  <section class="recipe-detail">
+    <h2 class="recipe-section-title">材料</h2>
+    <div class="recipe-box"><%= simple_format(@post.ingredients) %></div>
+
+    <h2 class="recipe-section-title">作り方</h2>
+    <div class="recipe-box"><%= simple_format(@post.steps) %></div>
+  </section>
+<% end %>

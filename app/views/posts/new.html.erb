@@ -1,0 +1,64 @@
+<%= stylesheet_link_tag 'new', media: "all" %>
+
+<div class="post-form-page">
+  <h1 class="page-title">新規レシピ投稿</h1>
+
+  <div class="form-card">
+    <%= form_for @post, html: { class: "recipe-form" } do |f| %>
+
+      <div class="field">
+        <%= f.label :title, "料理名" %>
+        <%= f.text_field :title, class: "input" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :image, "Image" %>
+        <%= f.file_field :image, class: "input-file" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :ingredients, "材料" %>
+        <%= f.text_area :ingredients, class: "textarea", rows: 6 %>
+      </div>
+
+      <div class="field">
+        <%= f.label :steps, "作り方" %>
+        <%= f.text_area :steps, class: "textarea", rows: 8 %>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <%= f.label :cook_time, "調理時間" %>
+          <%= f.select :cook_time, [["30分以内", 30], ["30〜60分", 60], ["60分以上", 999]],
+                { prompt: "選択してください" }, class: "select" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :difficulty, "難易度" %>
+          <%= f.select :difficulty, [["簡単（工程少なめ）", 0], ["普通", 1], ["難しい（工程多め）", 2]],
+                { prompt: "選択してください" }, class: "select" %>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="field">
+          <%= f.label :dish_type, "料理タイプ" %>
+          <%= f.select :dish_type, [["メイン", 0], ["サイド", 1], ["主食（ご飯、麺）", 2]],
+                { prompt: "選択してください" }, class: "select" %>
+        </div>
+
+        <div class="field">
+          <%= f.label :cuisine_type, "系統" %>
+          <%= f.select :cuisine_type, [["和", 0], ["洋", 1], ["中", 2]],
+                { prompt: "選択してください" }, class: "select" %>
+        </div>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "投稿する", class: "btn-primary" %>
+        <%= link_to "戻る", posts_path, class: "btn-ghost" %>
+      </div>
+
+    <% end %>
+  </div>
+</div>

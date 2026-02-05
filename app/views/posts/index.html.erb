@@ -1,0 +1,50 @@
+<div class="posts-page">
+
+  <section class="search-box">
+    <h2 class="search-title">レシピ検索</h2>
+
+    <%= form_tag({controller:"posts",action:"index"}, method: :get, class: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "料理名 / 材料で検索", class: "search-input" %>
+      <%= submit_tag "検索する", class: "search-button" %>
+    <% end %>
+
+    <div class="search-sub">
+      <% if user_signed_in? %>
+        <%= link_to "新規投稿", new_post_path, class: "link-primary" %>
+      <% else %>
+        <p class="muted">新規投稿するにはログインしてください</p>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="posts-list">
+    <h2 class="section-title">投稿一覧</h2>
+
+    <% if @posts.any? %>
+      <div class="posts-grid">
+        <% @posts.each do |post| %>
+          <article class="post-card">
+            <% if post.image.attached? %>
+              <%= image_tag post.image, class: "post-image" %>
+            <% else %>
+              <div class="post-image placeholder">画像</div>
+            <% end %>
+
+            <div class="post-body">
+              <h3 class="post-title">
+                <%= link_to post.title, post_path(post), class: "post-title-link" %>
+              </h3>
+
+              <p class="post-date">投稿日：<%= post.created_at.strftime("%Y/%m/%d") %></p>
+
+              <%= link_to "詳細", post_path(post), class: "post-detail" %>
+            </div>
+          </article>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="muted">条件に合うレシピが見つかりませんでした。</p>
+    <% end %>
+
+  </section>
+</div>

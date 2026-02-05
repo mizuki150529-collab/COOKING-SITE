@@ -1,0 +1,59 @@
+
+<div class="hero-slider">
+  <div class="slider-track">
+    <%= image_tag "home_food.jpeg", class: "slide" %>
+    <%= image_tag "home_food2.jpeg", class: "slide" %>
+    <%= image_tag "home_food3.jpeg", class: "slide" %>
+  </div>
+</div>
+
+
+<section class="topics">
+  <div class="topics-inner">
+    <h3 class="topics-title">TOPICS</h3>
+
+    <!-- ① 診断 -->
+    <div class="topic">
+      <div class="topic-text">
+        <h4>今日なに作る？<br>その迷い、5問で終わらせよう。</h4>
+        <p>今日の気分や使える時間から、あなたにぴったりのレシピを提案します。</p>
+        <%= link_to "診断する", diagnosis_intro_path, class: "topic-btn" %>
+      </div>
+
+      <div class="topic-media">
+        <%= image_tag "result_bg.jpeg", class: "topic-image" %>
+      </div>
+    </div>
+
+    <!-- ② 投稿一覧 -->
+    <div class="topic">
+      <div class="topic-text">
+        <h4>みんなのレシピをのぞいてみよう。</h4>
+        <p>選びたい人のための、リアルなレシピを紹介しています。</p>
+        <%= link_to "投稿一覧へ", posts_path, class: "topic-btn" %>
+      </div>
+
+      <div class="topic-media">
+        <%= image_tag "result_bg.jpeg", class: "topic-image" %>
+      </div>
+    </div>
+
+    <!-- ③ カレンダー -->
+    <div class="topic">
+      <div class="topic-text">
+        <h4>作った料理を、カレンダーで振り返ろう。</h4>
+        <p>作った料理を記録して、自分の「いつものごはん」を振り返ってみませんか？</p>
+
+        <% if user_signed_in? %>
+          <%= link_to "カレンダーを見る", user_path(anchor: "calendar"), class: "topic-btn" %>
+        <% else %>
+          <%= link_to "ログインして記録する", new_user_registration_path, class: "topic-btn" %>
+        <% end %>
+      </div>
+
+      <div class="topic-media">
+        <%= image_tag "result_bg.jpeg", class: "topic-image" %>
+      </div>
+    </div>
+  </div>
+</section>

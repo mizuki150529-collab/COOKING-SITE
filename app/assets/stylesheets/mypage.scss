@@ -1,0 +1,233 @@
+/* =========================
+   MyPage (SALONIA風)
+========================= */
+
+.mypage{
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 42px 32px 90px;
+}
+
+.mypage__title{
+  font-size: 32px;
+  text-align: center;
+  color: #111;
+  margin-bottom: 26px;
+  letter-spacing: .02em;
+}
+
+.muted{
+  color: #777;
+  font-size: 14px;
+}
+
+/* card */
+.card{
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.05);
+  margin-bottom: 18px;
+}
+
+.card__head{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.card__title{
+  font-size: 18px;
+  color: #111;
+}
+
+/* buttons */
+.btn-primary,
+.btn-ghost,
+.btn-danger{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:999px;
+  text-decoration:none;
+  font-size:14px;
+  padding: 0 16px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.btn-primary{
+  background:#111;
+  color:#fff;
+  border:none;
+}
+.btn-primary:hover{ opacity:.9; }
+
+.btn-ghost{
+  background:#fff;
+  color:#111;
+  border:1px solid #ddd;
+}
+.btn-ghost:hover{ background:#f5f5f5; }
+
+.btn-danger{
+  background:#fff;
+  color:#a33;
+  border:1px solid #e4b4b4;
+}
+.btn-danger:hover{ background:#fff5f5; }
+
+.btn-sm{ height:34px; padding:0 14px; font-size:13px; }
+.btn-xs{ height:28px; padding:0 10px; font-size:12px; }
+
+.inline{ display:inline; }
+
+/* profile */
+.profile{
+  display: grid;
+  gap: 10px;
+}
+.profile__row{
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background: #fafafa;
+}
+.profile dt{
+  color:#777;
+  font-size:12px;
+}
+.profile dd{
+  color:#111;
+  font-size:13px;
+}
+
+/* posts */
+.posts-list{
+  display: grid;
+  gap: 12px;
+}
+.post-row{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  background: #fff;
+}
+.post-row__title{
+  font-weight: 700;
+  color:#111;
+  margin-bottom: 4px;
+}
+.post-row__meta{
+  font-size:12px;
+  color:#777;
+}
+
+/* calendar nav */
+.cal-nav{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+.cal-nav__month{
+  font-weight: 700;
+  color:#111;
+}
+
+/* calendar */
+.calendar-wrap{
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+.calendar{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 10px;
+}
+.calendar th{
+  font-size: 12px;
+  color:#555;
+  text-align:center;
+}
+.calendar th.sun{ color:#c33; }
+.calendar th.sat{ color:#36c; }
+
+.calendar__cell{
+  vertical-align: top;
+  min-width: 140px;
+  height: 120px;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 10px;
+}
+
+.calendar__cell.is-today{
+  border-color: #bbb;
+  background: #fff;
+}
+
+.calendar__day{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  margin-bottom: 6px;
+  color:#111;
+}
+
+.today-badge{
+  font-size: 11px;
+  border: 1px solid #ddd;
+  background:#fff;
+  border-radius: 999px;
+  padding: 2px 8px;
+  color:#111;
+}
+
+.calendar__list{
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display:grid;
+  gap: 6px;
+}
+
+.calendar__item{
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+  gap: 8px;
+}
+
+.calendar__link{
+  color:#111;
+  text-decoration:none;
+  font-size: 12px;
+  line-height: 1.2;
+}
+.calendar__link:hover{ text-decoration: underline; }
+
+/* bottom */
+.mypage__bottom{
+  display:flex;
+  justify-content:center;
+  margin-top: 14px;
+}
+
+/* responsive */
+@media (max-width: 900px){
+  .mypage{ padding: 28px 16px 70px; }
+  .card__head{ flex-direction: column; align-items: flex-start; }
+  .profile__row{ grid-template-columns: 1fr; }
+  .post-row{ flex-direction: column; align-items: flex-start; }
+}

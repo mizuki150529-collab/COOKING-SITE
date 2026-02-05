@@ -1,0 +1,40 @@
+<h2>マイページ（料理カレンダー）</h2>
+
+<div style="margin-bottom: 10px;">
+  <%= link_to "◀ 前月", mypage_path(month: @month.prev_month.strftime("%Y-%m")) %> |
+  <strong><%= @month.strftime("%Y年%m月") %></strong> |
+  <%= link_to "次月 ▶", mypage_path(month: @month.next_month.strftime("%Y-%m")) %>
+</div>
+
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @range.to_a.each_slice(7) do |week| %>
+      <tr>
+        <% week.each do |date| %>
+          <td valign="top" style="min-width:120px; height:90px;">
+            <div style="display:flex; justify-content:space-between;">
+              <strong><%= date.day %></strong>
+              <% if date == Date.current %>
+                <span style="font-size:12px;">今日</span>
+              <% end %>
+            </div>
+
+            <% if @logs_by_date[date].present? %>
+              <ul style="padding-left:18px; margin:6px 0 0;">
+                <% @logs_by_date[date].each do |log| %>
+                  <li><%= link_to log.post.title, post_path(log.post) %></li>
+                <% end %>
+              </ul>
+            <% end %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

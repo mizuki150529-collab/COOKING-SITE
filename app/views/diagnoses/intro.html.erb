@@ -1,0 +1,15 @@
+<% content_for :body_class, "diagnosis-intro-page" %>
+
+<div class="diagnosis-intro with-bg">
+  <div class="intro-overlay"></div>
+
+  <div class="intro-content">
+    <p class="intro-brand">COOKING SITE</p>
+    <h1 class="intro-title">WHAT'S YOUR BEST RECIPE?</h1>
+    <p class="intro-subtitle">
+      今日の気分と時間から、ぴったりの料理を見つけよう
+    </p>
+
+    <%= link_to "SELECT", new_diagnosis_path, class: "intro-cta" %>
+  </div>
+</div>
