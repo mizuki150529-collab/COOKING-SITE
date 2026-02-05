@@ -56,7 +56,6 @@ group :test do
   gem "selenium-webdriver"
 end
 gem 'devise'
-gem 'dotenv-rails'
 gem 'cloudinary'
 gem 'activestorage-cloudinary-service'
 gem 'sass-rails'
