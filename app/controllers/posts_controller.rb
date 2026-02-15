@@ -1,7 +1,5 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_owner!, only: [:edit, :update, :destroy]
 
   def index
     if params[:search].present?
@@ -51,14 +49,7 @@ class PostsController < ApplicationController
 
   private
 
-  def set_post
-    @post = Post.find(params[:id])
-  end
 
-  def authorize_owner!
-    return if @post.user_id == current_user.id
-    redirect_to post_path(@post), alert: "権限がありません"
-  end
 
   def post_params
     params.require(:post).permit(

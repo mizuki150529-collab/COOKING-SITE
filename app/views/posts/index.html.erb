@@ -22,22 +22,22 @@
 
 
       <div class="posts-grid">
-        <% @posts.each do |post| %>
+        <% @posts.each do |t| %>
           <article class="post-card">
-            <% if post.image.attached? %>
-              <%= image_tag post.image, class: "post-image" %>
+            <% if t.image.attached? %>
+              <%= image_tag t.image, class: "post-image" %>
             <% else %>
               <div class="post-image placeholder">画像</div>
             <% end %>
 
             <div class="post-body">
               <h3 class="post-title">
-                <%= link_to post.title, post_path(post), class: "post-title-link" %>
+                <%= link_to t.title, post_path(t), class: "post-title-link" %>
               </h3>
 
-              <p class="post-date">投稿日：<%= post.created_at.strftime("%Y/%m/%d") %></p>
+              <p class="post-date">投稿日：<%= t.created_at.strftime("%Y/%m/%d") %></p>
 
-              <%= link_to "詳細", post_path(post), class: "post-detail" %>
+              <%= link_to "詳細", post_path(t), class: "post-detail" %>
             </div>
           </article>
         <% end %>
