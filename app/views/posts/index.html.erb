@@ -20,7 +20,7 @@
   <section class="posts-list">
     <h2 class="section-title">投稿一覧</h2>
 
-    <% if @posts.any? %>
+
       <div class="posts-grid">
         <% @posts.each do |post| %>
           <article class="post-card">
@@ -42,9 +42,6 @@
           </article>
         <% end %>
       </div>
-    <% else %>
-      <p class="muted">条件に合うレシピが見つかりませんでした。</p>
-    <% end %>
 
   </section>
 </div>
